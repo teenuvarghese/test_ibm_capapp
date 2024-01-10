@@ -1,0 +1,74 @@
+### get  the service document
+http://localhost:4004/odata/v4/CatalogService
+
+### get Metadata
+http://localhost:4004/odata/v4/CatalogService/$metadata
+
+###Get The employee data
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+
+###Pagination - load only small chunk of data
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$top=3&$skip=2
+
+###Filtering - Conditional search of data
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=nameFirst eq 'Sally'
+###Wildcard search
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=contains(nameFirst,'S')
+###Read data by key - GET
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/02BD2137-0890-1EEA-A6C2-BB55C197A7FB
+###Count records inside entity
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/$count
+
+###Insert the data with POST
+POST http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+Content-Type: application/json
+
+{
+  "nameFirst": "Teenu",
+  "nameMiddle": null,
+  "nameLast": "Oberoi",
+  "nameInitials": null,
+  "sex": "M",
+  "language": "E",
+  "phoneNumber": null,
+  "email": "anubhav.abap@gmail.com",
+  "loginName": "ANUBHAVO",
+  "Currency_code": "USD",
+  "salaryAmount": 100000,
+  "accountNumber": "8448454549",
+  "bankId": "121000358",
+  "bankName": "My Bank of San Francisco"
+}
+
+
+### Update  records inside entity
+PATCH  http://localhost:4004/odata/v4/CatalogService/EmployeeSet/343aad20-47f7-4c88-b2b3-8a93bb2d2db7
+Content-Type: application/json
+
+{
+    "nameFirst": "Teenu Varghese"
+}
+
+###Delete request to delete employee
+DELETE http://localhost:4004/odata/v4/CatalogService/EmployeeSet/343aad20-47f7-4c88-b2b3-8a93bb2d2db7
+###Get BPs
+GET http://localhost:4004/odata/v4/CatalogService/BusinessPartnerSet
+###Try deletion
+DELETE http://localhost:4004/odata/v4/CatalogService/BusinessPartnerSet/74867AD200E41EDBA5D8B06885A5C052
+###Read POs
+GET http://localhost:4004/odata/v4/CatalogService/POs
+
+###Read POs
+GET http://localhost:4004/odata/v4/CatalogService/ProductView/74867AD200E41EDBA5D8B06B26EB4052?$expand=To_Items
+
+###Read POs
+POST http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052/boost
+Content-Type: application/json
+
+{}
+
+###Calling function always READ the data
+GET http://localhost:4004/odata/v4/CatalogService/POs/ABC/largestOrder()
+
+###Read from custom entity
+GET http://localhost:4004/odata/v4/my/ReadEmployeeSrv
